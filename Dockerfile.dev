@@ -1,0 +1,14 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+# volumes resolve the files issue by keeping
+# references to files from local files system
+# so COPY . . is not necessary, but good to keep
+# in case of using Dockerfile without volumes
+COPY . .
+
+CMD ["npm", "run", "start"]
