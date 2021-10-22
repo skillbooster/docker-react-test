@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Blipi
+          Feature branch change
         </a>
       </header>
     </div>
