@@ -15,3 +15,37 @@ before_install:
 
 script:
   - docker run -e CI=true skillboost/docker-react-test npm run test -- --coverage
+
+# deploying to AWS
+# travis is configured to work with known
+# providers and recognizes the services
+deploy:
+  provider: elasticbeanstalk
+  # taken from available address to the server
+  # "...".us-east-2.elasticbeanstalk.com
+  region: "us-east-2"
+  # app name
+  app: "docker-react-test"
+  # env created by AWS EBS
+  env: "Dockerreacttest-env"
+  # when travis deploys takes all the code base
+  # files and zip them all up into 1 single file
+  # and copy it to S3 bucket
+  # it's a name of S3 bucket the file will
+  # be put into
+  bucket_name: "elasticbeanstalk-us-east-2-290622572962"
+  # path to the bucket
+  # default is the name of the app
+  # docker-react-test
+  # after deploy, folder will be put
+  # with the name same or similar to the name
+  # of the app within the S3 bucket as a folder
+  bucket_path: "docker-react-test"
+  # this happens only if there are commits
+  # pushed to master branch
+  # there will be buffer branch named feature
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
