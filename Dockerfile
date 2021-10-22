@@ -11,12 +11,6 @@ RUN npm run build
 
 # /app/build
 FROM nginx
-
-# PORT FORWARDING PORT 80
-# expose this port for incoming traffic
-# seems not necessary anymore, worked
-# without EXPOSE declared
-EXPOSE 80
 # --from=phase telling to copy content from
 # other phase defined with "as"
 # folder to copy as 2nd argument
