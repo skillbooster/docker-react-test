@@ -1,0 +1,17 @@
+language: generic
+# sudo privilages required
+sudo: required
+# apps required
+services:
+  # docker CLI
+  # need copy of docker
+  - docker
+
+# before the instructions executed
+before_install:
+  # build docker image using dev config
+  # add tag (-t name) to recognize the image
+  - docker build -t skillboost/docker-react-test -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true skillboost/docker-react-test npm run test -- --coverage
